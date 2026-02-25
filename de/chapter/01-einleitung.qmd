@@ -1,0 +1,21 @@
+# Einleitung
+
+<!-- Loesche diese Hinweise, sobald du sie gelesen hast.
+     Ausfuehrliche Anleitungen zu Quarto-Features (Zitate, Abbildungen, Tabellen,
+     Gleichungen, Querverweise) findest du im Writing Guide:
+     https://github.com/uham-bio/quarto-UHHthesis/blob/main/docs/writing-guide.md -->
+
+Die Einleitung sollte vom Allgemeinen ins Spezifische gehen. Beantworte dabei die folgenden Fragen:
+
+- Was ist das allgemeine Thema und warum ist es relevant?
+- Was ist der aktuelle Stand der Forschung? Welche Luecken oder Widersprueche gibt es?
+- Was ist die spezifische Fragestellung dieser Arbeit?
+- Welche Hypothesen werden getestet?
+- Wie ist die Arbeit gegliedert? (Argumentationskette, Teilprobleme)
+
+
+## Hinweise zur Literatur
+
+Nutze [Google Scholar](https://scholar.google.de/) oder [Web of Science](https://www.webofscience.com/) (erreichbar ueber [UHH VPN](https://www.rrz.uni-hamburg.de/services/netz/vpn.html)) zur Literaturrecherche. Weitere nuetzliche Datenbanken fuer die Biologie sind die [Elektronische Zeitschriftenbibliothek](https://www.sub.uni-hamburg.de/recherche/elektronische-zeitschriftenbibliothek.html) der UHH und [ScienceDirect](https://www.sciencedirect.com).
+
+Ein Literaturverwaltungsprogramm wie [Zotero](https://www.zotero.org/) (mit dem Plugin [Better BibTeX](https://retorque.re/zotero-better-bibtex/)) hilft beim Organisieren der Quellen und beim automatischen Export von `.bib`-Dateien. Fuer die Zitationssyntax und die Einrichtung des Literaturverzeichnisses siehe die Projektdokumentation.

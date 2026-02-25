@@ -1,0 +1,8 @@
+# List of Abbreviations {.unnumbered}
+
+| Abbreviation | Full term                |
+|:-------------|:-------------------------|
+| ATP          | Adenosine Triphosphate   |
+| CoA          | Coenzyme A               |
+| DNA          | Deoxyribonucleic Acid    |
+| mtDNA        | Mitochondrial DNA        |

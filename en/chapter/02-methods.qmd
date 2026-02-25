@@ -1,0 +1,71 @@
+```{r}
+#| include: false
+# Load packages needed for inline R code in this chapter
+library(knitr)
+library(kableExtra)
+library(flextable)
+```
+
+# Material and Methods
+
+<!-- For detailed guidance on all Quarto features shown below, see the Writing Guide:
+     https://github.com/uham-bio/quarto-UHHthesis/blob/main/docs/writing-guide.md -->
+
+The structure of this chapter depends very much on the type of research study, whether it is a field, laboratory or modelling study or a literature review. For field studies, the typical subsections are the
+
+- study site
+- experimental set-up
+- sampling design
+- statistical analysis with information on the used computer program ^[such as [R](https://cran.r-project.org/) - this is an example of a footnote]
+
+
+## Study site
+
+External images (e.g. maps) are embedded with Quarto's Markdown image syntax. The caption is set in square brackets and the display width via the `width` attribute:
+
+![Location of sampling site....](../images/sampling_site.jpg){#fig-location width="50%"}
+
+
+## Cross-references
+
+Figures are referenced with `@fig-label`, tables with `@tbl-label`. Labels must **not** contain underscores --- use hyphens instead. Sections can be linked via `[Section name]`, e.g. [Discussion]. For a full overview, see the project documentation.
+
+
+## Mathematical equations
+
+Inline equations use single dollar signs: $E = mc^2$. Display equations use double dollar signs: $$E = mc^2$$
+
+For numbered equations with cross-references, add a label with `{#eq-label}` after the closing `$$` (see @eq-mean):
+
+$$
+  \bar{X} = \frac{\sum_{i=1}^n X_i}{n}
+$$ {#eq-mean}
+
+Formulas should be integrated into sentences and end with a comma or period.
+
+
+## Chemical formulas
+
+Use `$\mathrm{...}$` to avoid automatic italicisation in math mode:
+
+- Subscript: $\mathrm{CH_4}$
+- Superscript: $\mathrm{O^-}$
+- Combined: $\mathrm{Fe_2^{2+}Cr_2O_4}$ via `$\mathrm{Fe_2^{2+}Cr_2O_4}$`
+- Hydrate bullet: CuCl $\bullet$ $\mathrm{7H_{2}O}$
+- Arrows: $\longrightarrow$ (reaction), $\rightleftharpoons$ (reversible), $\leftrightarrow$ (resonance)
+- Delta: $\Delta$
+
+Numbered reaction equations use display mode with a label:
+
+$$
+  \mathrm{C_6H_{12}O_6 + 6O_2} \longrightarrow \mathrm{6CO_2 + 6H_2O}
+$$ {#eq-reaction}
+
+Reference via @eq-reaction. Unnumbered inline reactions use dollar signs: $\mathrm{NH_4Cl_{(s)}} \rightleftharpoons \mathrm{NH_{3(g)}+HCl_{(g)}}$
+
+
+## Software
+
+This section should always come at the end of the method chapter. You should list here the R version you used and each package with its version number, including the reference. The following text creates everything necessary automatically. You only need to update the packages used:
+
+All analyses were performed using the statistical software R (version `r paste(R.Version()$major, R.Version()$minor, sep = ".")`) [@R-base]. This thesis, including tables, was generated using Quarto (version `r system("quarto --version", intern = TRUE)`), 'knitr' (version `r packageVersion("knitr")`) [@R-knitr], 'kableExtra' (version `r packageVersion("kableExtra")`) [@R-kableExtra], and 'flextable' (version `r packageVersion("flextable")`) [@R-flextable].

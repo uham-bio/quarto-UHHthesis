@@ -1,0 +1,120 @@
+```{r}
+#| include: false
+# Load packages needed in this chapter
+library(knitr)
+library(kableExtra)
+library(flextable)
+library(ggplot2)
+
+# Avoid fontspec/XeTeX requirement when rendering flextable to PDF with pdflatex
+set_flextable_defaults(fonts_ignore = TRUE)
+```
+
+# Results
+
+The result chapter is of great importance in an empirical study and should comprise a good mix of text, tables and figures. Use your research questions and hypotheses for structuring this chapter to provide the reader some structure and to not lose the thread.
+
+Figures and tables should be continuously numbered and referred to in the main text. LaTeX places figures and tables automatically where they fit best, which is sometimes on the next page. This is fine since they are cross-referenced anyway.
+
+Tables have generally a caption at the top, while figures have a caption at the bottom. This has to be considered in some of the R functions (see below).
+
+
+## Tables
+
+### Markdown table
+
+@tbl-md is a Markdown table including a caption and label for cross-referencing. The caption is set below the table with the `: caption text` syntax and the label is included in curly brackets after the caption.
+
+| A            | New              | Table          |
+|:-------------|:----------------:|---------------:|
+|left-aligned  |center-aligned    |right-aligned   |
+|$123          |$456              |$789            |
+|*italics*     |normal            |**boldface**    |
+
+: This is a table written in Markdown. {#tbl-md}
+
+
+### Tables generated with R
+
+Creating tables with R and packages like *knitr* and *kableExtra* is much easier (and protects against typing errors!) than manually entering values into a table by copying and pasting them into Excel or LaTeX. This shows once again how beautiful reproducible documents can be!
+
+#### Using the *knitr* and  *kableExtra* packages
+
+&nbsp;
+
+@tbl-kable1 is an example of using `knitr::kable` to generate the table and *kableExtra* functions to modify it. `knitr::kable()` has an explicit argument named `caption` where you can place your caption text.
+
+```{r}
+#| label: tbl-kable1
+#| tbl-cap: "This is a table produced with knitr and modified with kableExtra."
+
+# Import dataset from the data/ folder
+mtcars <- read.csv("data/mtcars.csv")
+
+# Plot only a subset of the data
+df <- mtcars[1:5, 1:6]
+
+if (knitr::is_latex_output()) {
+  kable(df, booktabs = TRUE) |>
+    kable_styling(position = "center", font_size = 9, latex_options = "hold_position") |>
+    add_header_above(c(" " = 1, "Group 1" = 2, "Group 2" = 2,
+      "Group 3" = 1, "Group 4" = 1)) |>
+    add_header_above(c(" ", "Group 5" = 4, "Group 6" = 2), bold = TRUE) |>
+    kableExtra::footnote(general = "Your comments go here.")
+} else {
+  kable(df, longtable = TRUE, booktabs = TRUE)
+}
+```
+
+
+#### The *flextable* package
+
+&nbsp;
+
+[flextable](https://ardata-fr.github.io/flextable-book/) creates tables that work across PDF and Word output, making it a versatile choice. @tbl-flextable1 shows an example. Note that `flextable` uses the `set_caption()` function for cross-referenceable captions:
+
+```{r}
+#| label: tbl-flextable1
+#| tbl-cap: "This is a table produced with flextable."
+
+df <- mtcars[1:5, 1:6]
+flextable(df) |>
+  autofit() |>
+  theme_booktabs() |>
+  bold(part = "header") |>
+  fontsize(size = 9, part = "all")
+```
+
+> **Tip:** Another excellent table package is [gt](https://gt.rstudio.com/), which provides a tidyverse-friendly grammar of tables. However, its PDF support is still maturing, so `kableExtra` (PDF) and `flextable` (PDF + Word) remain the most reliable choices for theses.
+
+
+## Figures
+
+Figures can directly be produced with R and displayed here. Since most students use *ggplot2*, the examples below use it. Similar to external images, figure captions and labels are placed inside the chunk options for cross-referencing (see @fig-scatter-fig).
+
+```{r}
+#| label: fig-scatter-fig
+#| fig-cap: "Relationship between horsepower and fuel economy."
+#| out-width: "100%"
+
+ggplot(mtcars, aes(x = hp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Gross Horsepower", y = "Miles Per Gallon") +
+  theme_minimal()
+```
+
+Purely for demonstration purposes, @fig-boxplot-fig shows a boxplot with just half the width and centered:
+
+```{r}
+#| label: fig-boxplot-fig
+#| fig-cap: "Fuel differences between transmission types (0 = automatic, 1 = manual)."
+#| out-width: "50%"
+#| fig-height: 3
+#| fig-align: center
+
+ggplot(mtcars, aes(x = factor(am), y = mpg)) +
+  geom_boxplot() +
+  labs(x = "Transmission (0 = automatic, 1 = manual)", y = "Miles Per Gallon") +
+  theme_minimal()
+```

@@ -1,0 +1,8 @@
+# Abkürzungsverzeichnis {.unnumbered}
+
+| Abkürzung | Bedeutung                |
+|:----------|:-------------------------|
+| ATP       | Adenosintriphosphat      |
+| CoA       | Coenzym A                |
+| DNA       | Desoxyribonukleinsäure   |
+| mtDNA     | Mitochondriale DNA       |

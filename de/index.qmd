@@ -1,0 +1,51 @@
+---
+# Metadaten fuer das PDF-Titelblatt (verwendet von template.tex).
+# Das DOCX-Deckblatt wird in _quarto.yml unter UHHthesis-docx konfiguriert.
+thesis_author: "Mandy Mustermann"
+type: "Bachelorarbeit"
+birth: "31. Januar 1970"
+degree_program: "Bachelor of Science Biologie"
+submit_date: "1. April 2000"
+advisor1: "Prof. A. Ersthelfer"
+advisor2: "Prof. Z. Eswirdschonwerden"
+
+# Abstandshaltung zwischen Paragraphen (verwendet von template.tex)
+space_between_paragraphs: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Hier alle Pakete hinzufuegen, die spaeter benoetigt werden
+library(knitr)
+library(kableExtra)
+library(flextable)
+library(ggplot2)
+
+# BibTeX-Eintraege fuer verwendete R-Pakete automatisch erzeugen.
+# Paketliste anpassen, wenn Pakete hinzukommen oder entfernt werden.
+knitr::write_bib(
+  c("base", "knitr", "kableExtra", "flextable"),
+  file = "bib/packages.bib"
+)
+```
+
+<!-- Fuer Einrichtung und Metadaten-Konfiguration, siehe den Getting Started Guide:
+     https://github.com/uham-bio/quarto-UHHthesis/blob/main/docs/getting-started.md
+     Fuer Anleitungen zum Schreiben (Zitate, Abbildungen, Tabellen, Gleichungen), siehe:
+     https://github.com/uham-bio/quarto-UHHthesis/blob/main/docs/writing-guide.md -->
+
+{{< include prelim/00-abstract.qmd >}}
+
+{{< include prelim/00-zusammenfassung.qmd >}}
+
+{{< include prelim/00-abkuerzungen.qmd >}}
+
+::: {.content-visible when-format="pdf"}
+
+\showlof
+\showlot
+\startmainmatter
+
+:::

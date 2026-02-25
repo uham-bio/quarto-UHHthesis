@@ -1,0 +1,84 @@
+project:
+  type: book
+  output-dir: thesis-output
+  execute-dir: project
+
+# --- Titelblatt-Metadaten ---
+# Diese Felder haben eine Doppelfunktion:
+#   PDF:  template.tex ignoriert subtitle/author und nutzt eigene
+#         Variablen aus index.qmd (thesis_author, type, birth, usw.).
+#   DOCX: Pandoc uebertraegt title/subtitle/author direkt auf die
+#         Word-Deckblatt-Stile (gleicher Ansatz wie im UHHthesis R-Paket).
+#         Quarto parst "date" als echtes Datum, daher kommen Einreichungs-
+#         datum und Gutachter*innen ins author-Array.
+book:
+  title: "Titel der Abschlussarbeit"
+  subtitle: |
+    vorgelegt von\
+    Mandy Mustermann\               
+    geboren am 31. Januar 1970
+  author:
+    - "Bachelorarbeit"
+    - "im Studiengang Bachelor of Science Biologie"
+    - "der Universität Hamburg"
+    - ""
+    - "eingereicht am 1. April 2000"
+    - "Gutachter*in: Prof. A. Ersthelfer"
+    - "Gutachter*in: Prof. Z. Eswirdschonwerden"
+  
+  output-file: "Abschlussarbeit"
+  chapters:
+    - index.qmd
+    - chapter/01-einleitung.qmd
+    - chapter/02-methodik.qmd
+    - chapter/03-ergebnisse.qmd
+    - chapter/04-diskussion.qmd
+    - chapter/96-referenzen.qmd
+  appendices:
+    - chapter/97-danksagung.qmd
+    - chapter/98-anhang.qmd
+    - chapter/99-versicherung.qmd
+
+# Bibliographie
+bibliography:
+  - bib/references.bib
+  - bib/packages.bib
+csl: bib/sage-harvard.csl
+link-citations: true
+
+# Deutsche Labels für Querverweise
+crossref:
+  fig-title: "Abbildung"
+  tbl-title: "Tabelle"
+  eq-prefix: "Gleichung"
+  fig-prefix: "Abb."
+  tbl-prefix: "Tab."
+  appendix-title: ""
+  appendix-delim: ""
+
+# "Anhänge"-Gruppenheader unterdrücken (gilt fuer PDF und DOCX)
+language:
+  section-title-appendices: ""
+
+# Execution defaults
+execute:
+  echo: false
+  warning: false
+  message: false
+
+# Output Formate
+format:
+  UHHthesis-pdf:
+    toc: true
+    toc-depth: 4
+    keep-tex: true
+    pdf-engine: pdflatex
+    top-level-division: section
+    include-in-header:
+      text: |
+        \usepackage{setspace}\onehalfspacing
+        \hypersetup{colorlinks=true,linkcolor=linkcol,filecolor=filecol,urlcolor=urlcol,citecolor=citecol,linktocpage=true,pdfpagemode=UseOutlines}
+  UHHthesis-docx:
+    toc: true
+    toc-depth: 4
+    number-sections: true

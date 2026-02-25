@@ -1,0 +1,13 @@
+title: UHHthesis
+author: Saskia Otto
+version: 1.0.0
+contributes:
+  formats:
+    pdf:
+      template: template.tex
+      keep-tex: true
+      pdf-engine: pdflatex
+    docx:
+      reference-doc: uhh-template.docx
+      filters:
+        - remove-appendix-prefix.lua

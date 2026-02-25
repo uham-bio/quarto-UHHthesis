@@ -1,0 +1,51 @@
+---
+# Thesis metadata for the PDF title page (used by template.tex).
+# The DOCX title page is configured in _quarto.yml under UHHthesis-docx.
+thesis_author: "Mandy Mustermann"
+type: "Bachelor's Thesis"
+birth: "31. January 1970"
+degree_program: "Bachelor of Science Biology"
+submit_date: "1. April 2000"
+advisor1: "Prof. A. First-Aid"
+advisor2: "Prof. Z. Itwillbeallright"
+
+# Spacing between paragraphs (used by template.tex)
+space_between_paragraphs: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Load all your packages that you need later
+library(knitr)
+library(kableExtra)
+library(flextable)
+library(ggplot2)
+
+# Auto-generate BibTeX entries for R packages used in this thesis.
+# Update the package list when you add or remove packages.
+knitr::write_bib(
+  c("base", "knitr", "kableExtra", "flextable"),
+  file = "bib/packages.bib"
+)
+```
+
+<!-- For setup and metadata configuration, see the Getting Started guide:
+     https://github.com/uham-bio/quarto-UHHthesis/blob/main/docs/getting-started.md
+     For writing guidance (citations, figures, tables, equations), see:
+     https://github.com/uham-bio/quarto-UHHthesis/blob/main/docs/writing-guide.md -->
+
+{{< include prelim/00-abstract.qmd >}}
+
+{{< include prelim/00-zusammenfassung.qmd >}}
+
+{{< include prelim/00-abbreviations.qmd >}}
+
+::: {.content-visible when-format="pdf"}
+
+\showlof
+\showlot
+\startmainmatter
+
+:::

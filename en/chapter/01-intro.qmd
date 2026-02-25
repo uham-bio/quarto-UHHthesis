@@ -1,0 +1,21 @@
+# Introduction
+
+<!-- Delete these instructions once you have read them.
+     For detailed guidance on Quarto features (citations, figures, tables,
+     equations, cross-references), see the Writing Guide:
+     https://github.com/uham-bio/quarto-UHHthesis/blob/main/docs/writing-guide.md -->
+
+The introduction should move from the general to the specific. Address the following points:
+
+- What is the general topic and why is it relevant?
+- What is the current state of research? Which gaps or contradictions exist?
+- What is the specific research question of this thesis?
+- Which hypotheses are tested?
+- How is the thesis structured? (chain of argumentation, subproblems)
+
+
+## Literature tips
+
+Use [Google Scholar](https://scholar.google.de/) or [Web of Science](https://www.webofscience.com/) (accessible via [UHH VPN](https://www.rrz.uni-hamburg.de/services/netz/vpn.html)) to find relevant publications. Further useful databases in biology include the [Electronic Journals Library](https://www.sub.uni-hamburg.de/recherche/elektronische-zeitschriftenbibliothek.html) of the UHH and [ScienceDirect](https://www.sciencedirect.com).
+
+A reference manager such as [Zotero](https://www.zotero.org/) (with the [Better BibTeX](https://retorque.re/zotero-better-bibtex/) plugin) helps organise your sources and export `.bib` files automatically. For citation syntax and bibliography setup, see the project documentation.

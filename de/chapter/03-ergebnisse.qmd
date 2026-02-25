@@ -1,0 +1,121 @@
+```{r}
+#| include: false
+# Pakete laden, die in diesem Kapitel benoetigt werden
+library(knitr)
+library(kableExtra)
+library(flextable)
+library(ggplot2)
+
+# fontspec/XeTeX-Anforderung vermeiden bei PDF-Rendering mit pdflatex
+set_flextable_defaults(fonts_ignore = TRUE)
+```
+
+# Ergebnisse
+
+Der Ergebnisteil ist fuer den Aufbau einer empirischen Arbeit extrem wichtig und sollte eine gute Mischung aus Text, Tabellen und Abbildungen sein. Um dem Leser eine Struktur zu geben und den roten Faden nicht zu verlieren, sollten die Forschungsfragen und Hypothesen fuer die Einteilung und Darstellung der Ergebnisse genutzt werden.
+
+Abbildungen und Tabellen gehoeren grundsaetzlich zum Text, solange sie in den Fliesstext eingebunden sind. Sie werden fortlaufend nummeriert, beschriftet und ggf. mit der entsprechenden Quelle versehen. Ausserdem wird jede Abbildung und Tabelle im Text referiert. LaTeX setzt Tabellen und Abbildungen in der Regel selbstaendig so, wie es am besten passt. Es ist kein Problem, wenn das entsprechende Objekt dadurch auf einer anderen Seite als der Verweis platziert wird.
+
+Tabellen erhalten in der Regel eine Ueberschrift, waehrend Abbildungen eine Bildunterschrift erhalten. Dies muss bei einigen R Funktionen beruecksichtigt werden (siehe nachfolgende Beispiele).
+
+
+## Tabellen
+
+### Markdown Tabellen
+
+@tbl-md ist eine Markdown-Tabelle mit Beschriftung und Label fuer Querverweise. Die Beschriftung wird unter der Tabelle mit der Syntax `: Beschriftungstext` angegeben und das Label in geschweiften Klammern danach.
+
+| A            | New              | Table          |
+|:-------------|:----------------:|---------------:|
+|left-aligned  |centre-aligned    |right-aligned   |
+|$123          |$456              |$789            |
+|*italics*     |normal            |**boldface**    |
+
+: Dies ist eine Tabelle, die direkt in Markdown geschrieben wurde. {#tbl-md}
+
+
+### Mit R erzeugte Tabellen
+
+Tabellen mit R und einzelnen Paketen zu erstellen ist viel einfacher (und schuetzt vor Tippfehlern!) als die manuelle Eingabe von Werten in eine Tabelle durch Kopieren und Einfuegen von Werten in Excel oder LaTeX. Dies zeigt wieder einmal, wie schoen reproduzierbare Dokumente sein koennen!
+
+#### Die Pakete `knitr` und  `kableExtra`
+
+&nbsp;
+
+@tbl-kable1 ist ein Beispiel fuer eine mit `knitr::kable()` erzeugte Tabelle, die mit Funktionen aus `kableExtra` dann weiter modifiziert wird. Eines der Argumente von `knitr::kable()` ist `caption` - hier wird die Beschriftung der Tabelle festgelegt:
+
+```{r}
+#| label: tbl-kable1
+#| tbl-cap: "Dies ist eine mit knitr::kable() erzeugte und mit kableExtra modifizierte Tabelle."
+
+# Daten einlesen aus dem data/ Ordner
+mtcars <- read.csv("data/mtcars.csv")
+
+# Plotten eines Teildatensatzes
+df <- mtcars[1:5, 1:6]
+
+if (knitr::is_latex_output()) {
+  kable(df, booktabs = TRUE) |>
+    kable_styling(position = "center", font_size = 9, latex_options = "hold_position") |>
+    add_header_above(c(" " = 1, "Gruppe 1" = 2, "Gruppe 2" = 2,
+      "Gruppe 3" = 1, "Gruppe 4" = 1)) |>
+    add_header_above(c(" ", "Gruppe 5" = 4, "Gruppe 6" = 2), bold = TRUE) |>
+    kableExtra::footnote(general = "Hier kommen Deine Kommentare rein.")
+} else {
+  kable(df, longtable = TRUE, booktabs = TRUE)
+}
+```
+
+
+#### Das `flextable` Paket
+
+&nbsp;
+
+[flextable](https://ardata-fr.github.io/flextable-book/) erstellt Tabellen, die sowohl in PDF als auch in Word funktionieren. @tbl-flextable1 zeigt ein Beispiel. Beachte, dass `flextable` die Funktion `set_caption()` fuer die Beschriftung nutzt:
+
+```{r}
+#| label: tbl-flextable1
+#| tbl-cap: "Dies ist eine mit flextable erzeugte Tabelle."
+
+df <- mtcars[1:5, 1:6]
+flextable(df) |>
+  autofit() |>
+  theme_booktabs() |>
+  bold(part = "header") |>
+  fontsize(size = 9, part = "all")
+```
+
+> **Tipp:** Ein weiteres empfehlenswertes Paket ist [gt](https://gt.rstudio.com/), das eine tidyverse-kompatible Syntax bietet. Da die PDF-Unterstuetzung noch nicht vollstaendig ausgereift ist, bleiben `kableExtra` (PDF) und `flextable` (PDF + Word) die zuverlaessigsten Optionen.
+
+
+## Abbildungen
+
+Abbildungen koennen direkt mit R erstellt und hier angezeigt werden. Da die meisten Studierenden *ggplot2* verwenden, nutzen die folgenden Beispiele dieses Paket. Wie bei externen Abbildungen wird die Abbildungsbeschriftung und der Name fuer Querverweise direkt in den Chunk-Optionen festgelegt (siehe @fig-scatter-fig).
+
+```{r}
+#| label: fig-scatter-fig
+#| fig-cap: "Beziehung zwischen Gesamtpferdestaerke und der Reichweite verschiedener Autotypen."
+#| out-width: "100%"
+
+ggplot(mtcars, aes(x = hp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Pferdestaerke", y = "Reichweite (Meilen pro Gallone)") +
+  theme_minimal()
+```
+
+Hier zum Vergleich in @fig-boxplot-fig ein Boxplot mit einer anderen Abbildungsgroesse.
+
+```{r}
+#| label: fig-boxplot-fig
+#| fig-cap: "Unterschiede der Reichweite zwischen den beiden Getriebearten (0 = automatisch, 1 = manuell)."
+#| out-width: "50%"
+#| fig-width: 5
+#| fig-height: 3
+#| fig-align: center
+
+ggplot(mtcars, aes(x = factor(am), y = mpg)) +
+  geom_boxplot() +
+  labs(x = "Getriebe (0 = automatisch, 1 = manuell)", y = "Reichweite (Meilen pro Gallone)") +
+  theme_minimal()
+```

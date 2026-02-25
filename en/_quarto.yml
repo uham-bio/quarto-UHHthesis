@@ -1,0 +1,79 @@
+project:
+  type: book
+  output-dir: thesis-output
+  execute-dir: project
+
+# --- Title page metadata ---
+# These fields serve double duty:
+#   PDF:  template.tex ignores subtitle/author and uses its own
+#         variables from index.qmd (thesis_author, type, birth, etc.).
+#   DOCX: Pandoc maps title/subtitle/author directly to the Word
+#         cover page styles (same trick as the UHHthesis R package).
+#         Quarto parses "date" as a real date, so we put submission
+#         date and advisors into the author array instead.
+book:
+  title: "Thesis title"
+  subtitle: |
+    submitted by\
+    Mandy Mustermann\
+    born on 31. January 1970
+  author:
+    - "Bachelor's Thesis"
+    - "in the degree program Bachelor of Science Biology"
+    - "at the University of Hamburg"
+    - ""
+    - "submitted on 1. April 2000"
+    - "Advisor: Prof. A. First-Aid"
+    - "Advisor: Prof. Z. Itwillbeallright"
+  
+  output-file: "Thesis"
+  chapters:
+    - index.qmd
+    - chapter/01-intro.qmd
+    - chapter/02-methods.qmd
+    - chapter/03-results.qmd
+    - chapter/04-discussion.qmd
+    - chapter/96-references.qmd
+  appendices:
+    - chapter/97-acknowledge.qmd
+    - chapter/98-appendix.qmd
+    - chapter/99-declaration.qmd
+
+# Bibliography
+bibliography:
+  - bib/references.bib
+  - bib/packages.bib
+csl: bib/sage-harvard.csl
+link-citations: true
+
+# Remove "Appendix" prefix from appendix labels (e.g. "Appendix A" → "A")
+crossref:
+  appendix-title: ""
+  appendix-delim: ""
+
+# Suppress the "Appendices" group header (affects both PDF and DOCX)
+language:
+  section-title-appendices: ""
+
+# Execution defaults
+execute:
+  echo: false
+  warning: false
+  message: false
+
+# Output formats
+format:
+  UHHthesis-pdf:
+    toc: true
+    toc-depth: 4
+    keep-tex: true
+    pdf-engine: pdflatex
+    top-level-division: section
+    include-in-header:
+      text: |
+        \usepackage{setspace}\onehalfspacing
+        \hypersetup{colorlinks=true,linkcolor=linkcol,filecolor=filecol,urlcolor=urlcol,citecolor=citecol,linktocpage=true,pdfpagemode=UseOutlines}
+  UHHthesis-docx:
+    toc: true
+    toc-depth: 4
+    number-sections: true
