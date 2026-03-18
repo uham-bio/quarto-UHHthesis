@@ -36,7 +36,7 @@ Answer **Yes** to both prompts (directory name and extension installation).
 **Prerequisites:** [Quarto](https://quarto.org/docs/get-started/) (>= 1.3), [R](https://cran.r-project.org/) (>= 4.0), [TinyTeX](https://yihui.org/tinytex/) or another LaTeX distribution for PDF output.
 
 For more details on installation, setup, and editor-specific instructions, see the
-[Getting Started](docs/getting-started.md) guide.
+[Getting Started](https://uham-bio.github.io/UHHthesis/articles/quarto-getting-started-en.html) guide.
 
 
 ## Project Structure
@@ -65,17 +65,17 @@ quarto render --to UHHthesis-pdf    # PDF only
 quarto render --to UHHthesis-docx   # DOCX only
 ```
 
-Output files are placed in the `thesis-output/` directory. See the [Getting Started](docs/getting-started.md) guide for IDE-specific instructions (RStudio, Positron).
+Output files are placed in the `thesis-output/` directory. See the [Getting Started](https://uham-bio.github.io/UHHthesis/articles/quarto-getting-started-en.html) guide for IDE-specific instructions (RStudio, Positron).
 
 
 ## Documentation
 
-| Guide | Description        |
-|:------|:-------------------|
-| **[Getting Started](docs/getting-started.md)** | Installation, project setup, metadata configuration, first render |
-| **[Writing Guide](docs/writing-guide.md)** | Cross-references, citations, figures, tables, equations, code chunks, appendices |
-| **[Thesis Guide BSc and MSc](docs/Guide_Thesis_BSc_MSc_TheSans.pdf?raw=true)** | Guidance on the thesis project itself — from the initial research question to structuring your chapters, writing style, and final submission. Not template-specific. |
-| **[Leitfaden Abschlussarbeit BSc und MSc](docs/Leitfaden_Abschlussarbeit_BSc_MSc_TheSans.pdf?raw=true)** | Deutsche Version des obigen Leitfadens |
+| Guide     | Description        |
+|:----------|:-------------------|
+| **[Getting Started (EN)](https://uham-bio.github.io/UHHthesis/articles/quarto-getting-started-en.html)** | Installation, project setup, metadata configuration, first render |
+| **[Erste Schritte (DE)](https://uham-bio.github.io/UHHthesis/articles/quarto-getting-started-de.html)** | German Tutorial on installation, project setup, metadata configuration, first render |
+| **[Writing Guide (EN)](https://uham-bio.github.io/UHHthesis/articles/quarto-writing-guide-en.html)** | Cross-references, citations, figures, tables, equations, code chunks, appendices |
+| **[Schreibanleitung (DE)](https://uham-bio.github.io/UHHthesis/articles/quarto-writing-guide-de.html)** | German Tutorial on cross-references, citations, figures, tables, equations, code chunks, appendices |
 
 
 ## Useful Resources
